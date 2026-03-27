@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdb-calculator
+  labels:
+    app: pdb-calculator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pdb-calculator
+  template:
+    metadata:
+      labels:
+        app: pdb-calculator
+    spec:
+      containers:
+      - name: pdb-calculator
+        image: pdb-calculator:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
